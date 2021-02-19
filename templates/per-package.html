@@ -1,0 +1,64 @@
+{{ define "packagePage" }}
+<html>
+<head>
+    <title>{{ .DisplayName }}</title>
+    {{ if .IsSubPath }}
+    <meta name="go-import" content="{{ .ParentDisplayName | getDomain }} git {{ .GitParentURL }}">
+    <meta name="go-source"
+          content="{{ .ParentDisplayName | getDomain }} {{ .GitParentURL }} {{ .GitParentURL }}/tree/{{ .GitRef }}{/dir} {{ .GitParentURL }}/tree/{{ .GitRef }}{/dir}/{file}#L{line}">
+    {{ else }}
+    <meta name="go-import" content="{{ .DisplayName | getDomain }} git {{ .GitURL }}">
+    <meta name="go-source"
+          content="{{ .DisplayName | getDomain }} {{ .GitURL }} {{ .GitURL }}/tree/{{ .GitRef }}{/dir} {{ .GitURL }}/tree/{{ .GitRef }}{/dir}/{file}#L{line}">
+    {{ end }}
+    {{ template "metaTpl" . }}
+</head>
+
+{{ template "navbarTpl" . }}
+
+<body>
+<div class="body-section">
+    <div class="flex one center">
+        <h3>{{ .DisplayName }}</h3>
+    </div>
+    <div class="flex one center">
+        <article class="card borderless">
+            <header>
+                <h5 class="topic-title">Download:</h5>
+            </header>
+            <footer>
+                <p class="subtitle">Use <code>go get</code> or <code>go modules</code> to obtain them</p>
+                <code>go get -u {{ .DisplayName | getDomain }}</code>
+            </footer>
+        </article>
+        <article class="card borderless">
+            <header>
+                <h5 class="topic-title">Git:</h5>
+            </header>
+            <footer>
+                <p class="subtitle">Repository for package: </p>
+                {{ if .IsSubPath }}
+                <a href="{{ .GitParentURL }}">{{ .GitParentURL }}</a>
+                {{ else }}
+                <a href="{{ .GitURL }}">{{ .GitURL }}</a>
+                {{ end }}
+            </footer>
+        </article>
+        <article class="card borderless">
+            <header>
+                <h5 class="topic-title">Docs:</h5>
+            </header>
+            <footer>
+                <p class="subtitle">Documentation for package: </p>
+                <code>TODO</code>
+            </footer>
+        </article>
+    </div>
+</div>
+</body>
+
+{{ template "footerTpl" . }}
+
+</html>
+
+{{ end }}

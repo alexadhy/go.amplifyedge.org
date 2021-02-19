@@ -1,0 +1,67 @@
+name: Deploy
+
+on: [ push ]
+
+jobs:
+  all:
+    name: Deploy
+
+    strategy:
+      fail-fast: false # saves ci time, won't be worth it if it even runs other platform
+      matrix:
+        os: [ ubuntu-20.04 ]
+        go-version: [ 1.16.0 ]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          stable: 'false'
+          go-version: ${{ matrix.go-version }}
+        id: go
+
+      - name: Setup Go binary path
+        shell: bash
+        run: |
+          echo "GOPATH=${{ github.workspace }}" >> $GITHUB_ENV
+          echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+
+      - name: Git line endings
+        shell: bash
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+
+      - name: Check out THIS code into the Go module directory
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: ${{ github.workspace }}/go/src/github.com/${{ github.repository }}
+
+      - name: build
+        shell: bash
+        working-directory: ${{ github.workspace }}/go/src/github.com/${{ github.repository }}
+        run: |
+          make build
+        timeout-minutes: 5
+
+      - name: setup ssh
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy
+          chmod 600 ~/.ssh/deploy
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/deploy.pub
+          chmod 600 ~/.ssh/deploy.pub
+          cat ~/.ssh/deploy.pub
+
+      - name: deploy
+        shell: bash
+        working-directory: ${{ github.workspace }}/go/src/github.com/${{ github.repository }}
+        run: |
+          make deploy
+        timeout-minutes: 5
+        env:
+          DEPLOY_IP: ${{ secrets.DEPLOY_IP }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}

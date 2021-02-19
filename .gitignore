@@ -1,0 +1,6 @@
+amplifyedge.org
+go-ampedge
+deployments/packer/packer.auto.pkrvars.hcl
+deployments/packer/ansible/inventories/init
+deployments/packer/ansible/.passwordfile
+/deployments/

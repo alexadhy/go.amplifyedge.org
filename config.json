@@ -1,0 +1,81 @@
+{
+  "global_domain": "go.amplifyedge.org",
+  "site_title": "AmplifyEdge Go Modules",
+  "template_dir": "./templates",
+  "packages": [
+    {
+      "display_name": "main-v2",
+      "git_url": "https://github.com/amplify-edge/main",
+      "git_ref": "master",
+      "description": "version 2 of our main application",
+      "is_sub_path": false,
+      "git_parent": ""
+    },
+    {
+      "display_name": "sys-v2",
+      "git_url": "https://github.com/amplify-edge/sys",
+      "git_ref": "master",
+      "description": "bottom-most stack of our application",
+      "is_sub_path": false,
+      "git_parent": ""
+    },
+    {
+      "display_name": "sys-share-v2",
+      "git_url": "https://github.com/amplify-edge/sys-share",
+      "git_ref": "master",
+      "description": "sys-share",
+      "is_sub_path": false,
+      "git_parent": ""
+    },
+    {
+      "display_name": "mod-v2",
+      "git_url": "https://github.com/amplify-edge/mod",
+      "git_ref": "master",
+      "description": "modules",
+      "is_sub_path": false,
+      "git_parent": ""
+    },
+    {
+      "display_name": "shared-v2",
+      "git_url": "https://github.com/amplify-edge/shared",
+      "git_ref": "master",
+      "description": "shared utilities / tools",
+      "is_sub_path": false,
+      "git_parent": ""
+    },
+    {
+      "display_name": "booty-v2",
+      "git_url": "https://github.com/amplify-edge/booty",
+      "git_ref": "master",
+      "description": "bootstrapper",
+      "is_sub_path": false,
+      "git_parent": ""
+    },
+    {
+      "display_name": "shared-v2/tool/bs-lang",
+      "parent_display_name": "shared-v2",
+      "git_url": "https://github.com/amplify-edge/shared-v2/tool/bs-lang",
+      "git_ref": "master",
+      "description": "lang translate tools",
+      "is_sub_path": true,
+      "git_parent": "https://github.com/amplify-edge/shared"
+    },
+    {
+      "display_name": "shared-v2/tool/bs-crypt",
+      "parent_display_name": "shared-v2",
+      "git_url": "https://github.com/amplify-edge/shared-v2/tool/bs-crypt",
+      "git_ref": "master",
+      "description": "encrypt files",
+      "is_sub_path": true,
+      "git_parent": "https://github.com/amplify-edge/shared"
+    },
+    {
+      "display_name": "protoc-gen-cobra",
+      "git_url": "https://github.com/amplify-edge/protoc-gen-cobra",
+      "git_ref": "master",
+      "description": "fork of github.com/NathanBaulch/protoc-gen-cobra",
+      "is_sub_path": false,
+      "git_parent": ""
+    }
+  ]
+}

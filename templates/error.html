@@ -1,0 +1,22 @@
+{{ define "errorPage" }}
+<html>
+<head>
+    <title>AmplifyEdge</title>
+    {{ template "metaTpl" . }}
+</head>
+
+{{ template "navbarTpl" . }}
+
+<body>
+<div class="body-section">
+    <div class="error">
+        <h1>{{ .Reason }}</h1>
+    </div>
+</div>
+</body>
+
+{{ template "footerTpl" . }}
+</html>
+
+
+{{ end }}

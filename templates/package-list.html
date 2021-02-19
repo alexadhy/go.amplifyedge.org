@@ -1,0 +1,28 @@
+{{ define "listPage" }}
+<html>
+<head>
+    <title>{{ .SiteTitle }}</title>
+    {{ template "metaTpl" . }}
+</head>
+
+{{ template "navbarTpl" . }}
+
+<body>
+<div class="body-section">
+    <h2 class="doc-title">Packages / Go Modules</h2>
+    <ul>
+        {{ range $pkg := .Packages }}
+        <li>
+            <h4>
+                <a href="/{{ $pkg.DisplayName }}">{{ $pkg.DisplayName }}</a>
+            </h4>
+            <small class="subtitle">{{ $pkg.Description }}</small>
+        </li>
+        {{ end }}
+    </ul>
+</div>
+</body>
+
+{{ template "footerTpl" . }}
+</html>
+{{ end }}
